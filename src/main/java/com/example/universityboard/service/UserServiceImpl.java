@@ -44,7 +44,11 @@ public class UserServiceImpl implements UserDetailsService {
 		}
 	}
 
-	public User saveUser(User user) {
+	public User saveUser(User user) throws Exception {
+		User u = this.userRepository.findByUsername(user.getUsername());
+		if (u != null) {
+			throw new Exception("user already exist");
+		}
 		user.setPassword(this.passwordEncoder.encode(user.getPassword()));
 		return this.userRepository.save(user);
 	}

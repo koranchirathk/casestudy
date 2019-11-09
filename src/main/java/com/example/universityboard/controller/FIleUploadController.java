@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.universityboard.model.Photo;
@@ -19,6 +20,7 @@ import com.example.universityboard.model.Video;
 import com.example.universityboard.service.PhotoService;
 import com.example.universityboard.service.VideoService;
 
+@RestController
 public class FIleUploadController {
 
 	@Autowired
