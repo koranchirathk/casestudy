@@ -1,25 +1,48 @@
 package com.example.universityboard.model;
 
+import java.util.List;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "usercollection")
-public class User {
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
+@Document(collection = "users")
+public class User {
 	@Id
 	private String id;
-	
-	private String userid;
-	
+	private String name;
+	private String username;
+	@JsonProperty(access = Access.WRITE_ONLY)
 	private String password;
-	private String role;
+	private List<String> roles;
 
-	public String getUserid() {
-		return userid;
+	public User() {
+
 	}
 
-	public void setUserid(String userid) {
-		this.userid = userid;
+	public User(String name, String username, String password, List<String> roles) {
+		this.name = name;
+		this.username = username;
+		this.password = password;
+		this.roles = roles;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getPassword() {
@@ -30,12 +53,26 @@ public class User {
 		this.password = password;
 	}
 
-	public String getRole() {
-		return role;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setRole(String role) {
-		this.role = role;
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public List<String> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<String> roles) {
+		this.roles = roles;
+	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", name=" + name + ", username=" + username + ", password=" + password + ", roles="
+				+ roles + "]";
 	}
 
 }
