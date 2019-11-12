@@ -6,6 +6,11 @@ import java.util.Base64;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -57,13 +62,36 @@ public class FIleUploadController {
 		return "redirect:/videos/" + id;
 	}
 	
+	
+//	@RequestMapping(value = "/Image/{id:.+}", method = RequestMethod.GET)
+//	public ResponseEntity<byte[]> getImage(@PathVariable("id") String id) {
+//	    byte[] image = imageService.getImage(id);
+//	    return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(image);
+//	}
 
     @GetMapping("/photos/{id}")
-    public String getPhoto(@PathVariable String id, Model model) {
+    public ResponseEntity getPhoto(@PathVariable String id, Model model) {
         Photo photo = photoService.getPhoto(id);
         model.addAttribute("title", photo.getTitle());
         model.addAttribute("image", Base64.getEncoder().encodeToString(photo.getImage().getData()));
-        return "photos";
+        byte[] image = photo.getImage().getData();
+	    return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(image);
+        
+        
+//        for file
+//        HttpHeaders header = new HttpHeaders();
+//        header.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=img.jpg");
+//        header.add("Cache-Control", "no-cache, no-store, must-revalidate");
+//        header.add("Pragma", "no-cache");
+//        header.add("Expires", "0");
+//
+//        ByteArrayResource resource = new ByteArrayResource(image);
+//
+//        return ResponseEntity.ok()
+//                .headers(header)
+//                .contentLength(image.length)
+//                .contentType(MediaType.parseMediaType("application/octet-stream"))
+//                .body(resource);
     }
 
     @GetMapping("/photos/upload")
