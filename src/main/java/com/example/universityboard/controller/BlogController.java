@@ -41,7 +41,7 @@ public class BlogController {
 	}
 	
 	@GetMapping("/getblogbyauthonamer/{authorName}")
-	public BlogDetails getGroupByNameblog(@PathVariable String authorName) {
+	public List<BlogDetails> getGroupByNameblog(@PathVariable String authorName) {
 		return blogServiceImpl.getBlogbyAuthorName(authorName);
 	}
 

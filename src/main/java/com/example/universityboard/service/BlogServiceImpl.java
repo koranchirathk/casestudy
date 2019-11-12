@@ -42,7 +42,7 @@ public class BlogServiceImpl {
 
 	}
 
-	public BlogDetails getBlogbyAuthorName(String authorName) {
+	public List<BlogDetails> getBlogbyAuthorName(String authorName) {
 		return blogRepository.findByBlogAuthor(authorName);
 	}
 
