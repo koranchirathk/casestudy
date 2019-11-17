@@ -56,5 +56,9 @@ public class UserServiceImpl implements UserDetailsService {
 	public List<User> getAll() {
 		return this.userRepository.findAll();
 	}
+	
+	public User getUserDetails(String username) {
+		return this.userRepository.findByUsername(username);
+	}
 
 }

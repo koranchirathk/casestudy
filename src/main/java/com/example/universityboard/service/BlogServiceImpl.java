@@ -31,7 +31,7 @@ public class BlogServiceImpl {
 		if (optionalblogDetails.isPresent()) {
 			bd = optionalblogDetails.get();
 			bd.setBlogTitle(blogDetails.getBlogTitle());
-			bd.setBlogTitle(blogDetails.getBody());
+			bd.setBody(blogDetails.getBody());
 		}
 
 		return this.blogRepository.save(bd);
